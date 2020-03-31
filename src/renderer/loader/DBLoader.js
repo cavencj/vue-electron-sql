@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-08 12:36:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-31 09:15:09
+ * @Last Modified time: 2020-03-31 12:58:58
  */
 
 import Vue from 'vue'
@@ -18,16 +18,16 @@ class DBLoader {
       fs.exists(`${HOME_PATH}/.db`, exists => {
         !exists && fs.mkdirSync(`${HOME_PATH}/.db`)
       })
-      fs.exists(`${HOME_PATH}/.db/dv.sqlite`, exists => {
+      fs.exists(`${HOME_PATH}/.db/db.sqlite`, exists => {
         if (!exists) {
           let db = new SQL.Database()
           db.run(sql)
           let buffer = Buffer.from(db.export(), 'base64')
-          fs.writeFileSync(`${HOME_PATH}/.db/dv.sqlite`, buffer)
+          fs.writeFileSync(`${HOME_PATH}/.db/db.sqlite`, buffer)
           db.close()
         }
         this._db = new SQL.Database(
-          fs.readFileSync(`${HOME_PATH}/.db/dv.sqlite`)
+          fs.readFileSync(`${HOME_PATH}/.db/db.sqlite`)
         )
       })
     })
@@ -91,7 +91,7 @@ class DBLoader {
         this._db.run(sql, params)
         let data = this._db.export()
         fs.writeFileSync(
-          `${HOME_PATH}/.db/dv.sqlite`,
+          `${HOME_PATH}/.db/db.sqlite`,
           Buffer.from(data, 'base64')
         )
         resolve()

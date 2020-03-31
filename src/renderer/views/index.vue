@@ -1,9 +1,6 @@
 <template>
   <div class="index">
-    <div class="title">
-      <p><img src="../assets/images/favicon.png" /> D V</p>
-      <p class="desc">-- 用数字呈现世界之美</p>
-    </div>
+    <div class="title"></div>
     <div class="info">
       <el-button round @click="gotoHome">开始</el-button>
     </div>
